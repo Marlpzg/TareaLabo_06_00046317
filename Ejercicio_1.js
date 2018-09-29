@@ -93,10 +93,10 @@ function registrarVenta(){
 
         while(true){
             stock = prompt("Ingrese la cantidad de producto a vender. (Mayor o igual a 0)", producto.Stock);
-            if(stock < 0){
+            if(stock <= 0){
                 alert("Ingrese una cantidad válida.");
-            }else if(stock > producto.Stock){
-                alert("No cuenta con stock suficiente para realizar la venta.")
+            }else if(producto.Stock-stock < 0){
+                alert("No cuenta con stock suficiente para realizar la venta.");
             }else{
                 break;
             }
@@ -117,11 +117,13 @@ function registrarVenta(){
 function stockCero(){
     alert("Listado de productos con stock de 0.");
     for(let x of productos){
-        let msg = "";
-        msg = msg + "Código: " + x.Codigo + "\n";
-        msg = msg + "Descripción: " + x.Descripcion + "\n";
-        msg = msg + "Tipo: " + x.Tipo + "\n";
-        alert(msg);
+        if(x.Stock == 0){
+            let msg = "";
+            msg = msg + "Código: " + x.Codigo + "\n";
+            msg = msg + "Descripción: " + x.Descripcion + "\n";
+            msg = msg + "Tipo: " + x.Tipo + "\n";
+            alert(msg);
+        }
     }
 }
 
@@ -143,7 +145,7 @@ function iniciarPrograma(){
                     //promVentas();
                     break;
                 case "5":
-                stockCero();
+                    stockCero();
                     break;
                 default:
                     alert("Por favor ingrese un dato válido.")
